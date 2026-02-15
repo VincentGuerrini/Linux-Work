@@ -18,7 +18,7 @@
 
 **ADRESS BROADCAST** : 10.33.68.255
 
-![alt text](image-1.png)
+![alt text](image/image-1.png)
 
 **NOM** : Realtek PCIe GbE Family Controller
 
@@ -31,10 +31,10 @@ La commande pour connaître l'adresse IP de la passerelle de votre carte WiFi es
 Pour obtenir les information en passant par des méthode graphique soit GUI on doit : 
 
 Aller dans **Paramètre** puis **Réseau et Internet** :
-![alt text](image-2.png)
+![alt text](image/image-2.png)
 
 Ensuite aller dans **Propriétés du Matériel** :
-![alt text](image-3.png)
+![alt text](image/image-3.png)
 
 Le Gateway permet de relier deux réseaux informatiques de types **différents**, donc à ingésup elle permet de relier le réseau **interne** au réseau **externe**.
 
@@ -45,19 +45,19 @@ Le Gateway permet de relier deux réseaux informatiques de types **différents**
 Dans mon réseau actuel il existe **4096** adresse car il s'agit d'un **/20**. Mais seulement **4094** sont disponible donc de la **10.33.68.1** à la **10.33.68.4094**.
 
 Je peux changer mon ip manuelement en allant encore dans **Paramètre** puis **Réseau et Internet** :
-![alt text](image-4.png)
+![alt text](image/image-4.png)
 
 ---
 
 #### B - nmap
 
-![alt text](image-5.png)
+![alt text](image/image-5.png)
 
 *>>> nmap -sn -PE 10.33.68.0/20*
-![alt text](image-6.png)
+![alt text](image/image-6.png)
 
 *>>> nmap -sL -PE 10.33.68.0/20*
-![alt text](image-7.png)
+![alt text](image/image-7.png)
 
 ---
 
@@ -73,30 +73,30 @@ Apres  avoir modier le Gateway je n'est plus acces a internet car il doit sureme
 
 ### 1 - DHCP
 
-![alt text](image-8.png)
+![alt text](image/image-8.png)
 **Adresse du DHCP** : 10.33.79.254
 
 **le bail expire** : samedi 24 janvier 2026 01:20:58
 
 La commande "*ipconfig /renew*" me permet de demander au DHCP une nouvelle ip :
-![alt text](image-9.png)
+![alt text](image/image-9.png)
 
 ### 2 - DNS
 
-![alt text](image-8.png)
+![alt text](image/image-8.png)
 **Adresse DNS** : 8.8.8.8
 
 la commande "*nslookup*" me donne :
-![alt text](image-10.png)
+![alt text](image/image-10.png)
 
 ***nslookup google.com***
-![alt text](image-11.png)
+![alt text](image/image-11.png)
 
 ***nslookup ynov.com***
-![alt text](image-12.png)
+![alt text](image/image-12.png)
 
 ***nslookup 78.78.21.21***
-![alt text](image-13.png)
+![alt text](image/image-13.png)
 
 ***nslookup 92.16.54.88***
-![alt text](image-14.png)
+![alt text](image/image-14.png)

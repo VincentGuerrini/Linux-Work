@@ -1,0 +1,7 @@
+Vincent
+15 février 2026
+Ceci est un document confidentiel.
+Il contient des informations sensibles.
+Ce fichier sera chiffré avec AES-256.
+La sécurité des données est primordiale.
+OpenSSL est un outil puissant pour la cryptographie
