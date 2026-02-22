@@ -1,18 +1,18 @@
 # B1 Linux - TP4
 
-## Partie 1 – Mise en place de l’environnement virtualisé
+## Partie 1 – Mise en place de l'environnement virtualisé
 
-Je commence par crée ma VM que met en **Réseau : Bridged Adapter**
+Je commence par créer ma VM que je mets en **Réseau : Bridged Adapter**
 ![image](image/image.png)
 
-Puis j'esseye de Ping ma VM à partir de mon Windows
+Puis j'essaye de Ping ma VM à partir de mon Windows
 ![image](image/image2.png)
 
 ---
 
 ## Partie 2 – Serveur SSH
 
-J'install ensuite OpenSSH sur ma VM pour pouvoir me connecter à ma VM en SSH a partir de mon pc : 
+J'installe ensuite OpenSSH sur ma VM pour pouvoir me connecter à ma VM en SSH à partir de mon pc : 
 ```sudo apt install openssh-server```
 
 Et maintenant je me connecte depuis mon pc :
@@ -20,7 +20,7 @@ Et maintenant je me connecte depuis mon pc :
 
 ![image](image/image3.png)
 
-Puis je vais générez une clé SSH sur la machine cliente
+Puis je vais générer une clé SSH sur la machine cliente
 ```ssh-keygen```
 
 puis on copie dans un fichier et puis on fait la commande :
@@ -31,20 +31,20 @@ ce qui va me permettre de me connecter en ssh sans mot de passe
 
 ## Partie 3 – Sécurisation SSH
 
-Tout d'abord je vais modifier quelque regle de connection sur ma vm :
+Tout d'abord je vais modifier quelques règles de connexion sur ma VM :
 
-- Interdisez l’accès root.
-- Désactivez l’authentification par mot de passe.
+- Interdisez l'accès root.
+- Désactivez l'authentification par mot de passe.
 - Changez le port par défaut (22) pour réduire les tentatives de brute-force.
 
-Avec les chagement suivante : 
+Avec les changements suivants : 
 ```
 PermitRootLogin no
 PasswordAuthentication no
 Port 2222
 ```
 
-Puis on test avec la commande suivante : 
+Puis on teste avec la commande suivante : 
 ```ssh -p 2222 vincent@192.168.1.23```
 
 ![image](image/image4.png)
@@ -66,10 +66,10 @@ Puis je teste ;
 
 ## Partie 4 – Transfert de fichiers
 
-Je transfere un fichier de mon pc vers ma vm 
+Je transfère un fichier de mon pc vers ma VM 
 ```scp -P 2222 "C:\Users\vince\OneDrive\Bureau\text.txt" vincent@192.168.1.23:/home/vincent/ text.txt```
 
-Et je verifie que ça a bien fonctionner :
+Et je vérifie que ça a bien fonctionné :
 ![image](image/image6.png)
 
 ```
@@ -82,17 +82,17 @@ lcd C:\Users\vince\Docs  # changer de répertoire local
 exit                     # quitter SFTP
 ```
 
-Pour syncroniser un dossier entre ma vm et mon pc  je fait cette commande
+Pour synchroniser un dossier entre ma VM et mon pc je fais cette commande
 ```rsync -avz -e "ssh -p 2222" dossier/ vincent@192.168.1.23:/home/vincent/```
 
 ## Partie 5 – Analyse des logs et sécurité
 
-Je regarde les log d'autorisation ssh sur ma vm :
+Je regarde les logs d'autorisation ssh sur ma VM :
 ```sudo tail -f /var/log/auth.log```
 
 ![image](image/image7.png)
 
-Puis j'installe fail2ban et le test :
+Puis j'installe fail2ban et le teste :
 ```sudo apt install fail2ban```
 
 ![image](image/image8.png)
@@ -106,14 +106,14 @@ sudo systemctl start nginx
 sudo systemctl status nginx
 ```
 
-puis on esseye de le connecter a mon port **8080** de mon pc :  
+puis on essaye de le connecter à mon port **8080** de mon pc :  
 ```ssh -L 8080:localhost:80 serveur-tp```
 
 ![image](image/image9.png)
 
 ## Partie 7 – Nginx et HTTPS
 
-Tour d'abord j'installe Nginx et l'active :
+Tout d'abord j'installe Nginx et l'active :
 ```
 sudo apt install nginx -y
 sudo systemctl start nginx
@@ -121,20 +121,20 @@ sudo systemctl enable nginx
 sudo systemctl status nginx
 ```
 
-Ensuite je cree un site test dans /var/www/site-tp et un fichier index.html avec un message "Hello World!" :
+Ensuite je crée un site test dans /var/www/site-tp et un fichier index.html avec un message "Hello World!" :
 ```
 sudo mkdir -p /var/www/site-tp
 sudo nano /var/www/site-tp/index.html
 ```
 
-Ensuite nous allons configurez Nginx pour servir ce site sur HTTP : 
+Ensuite nous allons configurer Nginx pour servir ce site sur HTTP : 
 ```
 sudo ln -s /etc/nginx/sites-available/site-tp /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 ```
 
-Pour finir je génére un certificat auto-signé pour HTTPS et configurez la redirection HTTP → HTTPS :
+Pour finir je génère un certificat auto-signé pour HTTPS et configure la redirection HTTP → HTTPS :
 ```
 sudo mkdir -p /etc/nginx/ssl
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
@@ -143,7 +143,7 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 sudo nano /etc/nginx/sites-available/site-tp
 ```
 
-Je le met ensuite en HTTPS :
+Je le mets ensuite en HTTPS :
 ```
 sudo nano /etc/nginx/sites-available/site-tp
 sudo nginx -t
@@ -157,22 +157,22 @@ Pour finir je teste :
 
 ## Partie 8 – Firewall et permissions
 
-Tout d'abord j'autorisez Nginx dans le firewall (ports HTTP/HTTPS) :
+Tout d'abord j'autorise Nginx dans le firewall (ports HTTP/HTTPS) :
 ```
 sudo ufw enable
 sudo ufw allow 'Nginx Full'
 sudo ufw allow 2222
 ```
 
-Je change esuite les autorisation :
+Je change ensuite les autorisations :
 ```sudo ufw status verbose```
 
-Ensuite je vérifie si les autorisations sont correct :
+Ensuite je vérifie si les autorisations sont correctes :
 ```ls -la /var/www/site-tp/```
 
 ![image](image/image11.png)
 
-Pour finir je verifie que sur mon pc j'arrive toujours a mis connecter :
+Pour finir je vérifie que sur mon pc j'arrive toujours à m'y connecter :
 ```curl.exe -k https://192.168.1.23```
 
 ![image](image/image12.png)
@@ -212,4 +212,4 @@ sudo fail2ban-client status sshd
 
 ![image](image/image18.png)
 
-Tout es bon et fonctionne !!!
+Tout est bon et fonctionne !!!

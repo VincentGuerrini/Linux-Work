@@ -1,6 +1,6 @@
 # B1 Linux - TP2
 
-## Parti 1 - Exploration locale
+## Partie 1 - Exploration locale
 
 ### 1 - Affichage d'informations sur la pile TCP/IP locale
 
@@ -10,41 +10,41 @@
 
 **NOM** : MediaTek Wi-Fi 7 MT7925 Wireless LAN Card
 
-**ADRESS MAC** : 48-45-E6-8C-67-67
+**ADRESSE MAC** : 48-45-E6-8C-67-67
 
-**ADRESS IP** : 10.33.68.42
+**ADRESSE IP** : 10.33.68.42
 
-**ADRESS RESEAU** : 10.33.68./20
+**ADRESSE RÉSEAU** : 10.33.68./20
 
-**ADRESS BROADCAST** : 10.33.68.255
+**ADRESSE BROADCAST** : 10.33.68.255
 
 ![alt text](image/image-1.png)
 
 **NOM** : Realtek PCIe GbE Family Controller
 
-**ADRESS MAC** : 18-3D-2D-EF-2A-0F
+**ADRESSE MAC** : 18-3D-2D-EF-2A-0F
 
-**ADRESS IP** : Aucune (pas connecter)
+**ADRESSE IP** : Aucune (pas connecté)
 
-La commande pour connaître l'adresse IP de la passerelle de votre carte WiFi est "*ipconfig /all* "dans un cmd par exemple
+La commande pour connaître l'adresse IP de la passerelle de votre carte WiFi est "*ipconfig /all*" dans un cmd par exemple
 
-Pour obtenir les information en passant par des méthode graphique soit GUI on doit : 
+Pour obtenir les informations en passant par des méthodes graphiques soit GUI on doit : 
 
-Aller dans **Paramètre** puis **Réseau et Internet** :
+Aller dans **Paramètres** puis **Réseau et Internet** :
 ![alt text](image/image-2.png)
 
 Ensuite aller dans **Propriétés du Matériel** :
 ![alt text](image/image-3.png)
 
-Le Gateway permet de relier deux réseaux informatiques de types **différents**, donc à ingésup elle permet de relier le réseau **interne** au réseau **externe**.
+Le Gateway permet de relier deux réseaux informatiques de types **différents**, donc à Ingésup elle permet de relier le réseau **interne** au réseau **externe**.
 
 ### 2 - Modifications des informations
 
 #### A - Modification d'adresse IP - pt. 1
 
-Dans mon réseau actuel il existe **4096** adresse car il s'agit d'un **/20**. Mais seulement **4094** sont disponible donc de la **10.33.68.1** à la **10.33.68.4094**.
+Dans mon réseau actuel il existe **4096** adresses car il s'agit d'un **/20**. Mais seulement **4094** sont disponibles donc de la **10.33.68.1** à la **10.33.68.4094**.
 
-Je peux changer mon ip manuelement en allant encore dans **Paramètre** puis **Réseau et Internet** :
+Je peux changer mon IP manuellement en allant encore dans **Paramètres** puis **Réseau et Internet** :
 ![alt text](image/image-4.png)
 
 ---
@@ -63,13 +63,13 @@ Je peux changer mon ip manuelement en allant encore dans **Paramètre** puis **R
 
 #### C - Modification d'adresse IP - pt. 2
 
-Avec la commande *"nmap -sn 10.33.68.0/20"* j'ai pus obtenir un adress ip libre : **"10.33.68.85"** et avoir pus la modifier comme précédement 
+Avec la commande *"nmap -sn 10.33.68.0/20"* j'ai pu obtenir une adresse IP libre : **"10.33.68.85"** et avoir pu la modifier comme précédemment 
 
-Apres  avoir modier le Gateway je n'est plus acces a internet car il doit surement être incorrect 
+Après avoir modifié le Gateway je n'ai plus accès à internet car il doit sûrement être incorrect 
 
 ---
 
-## Parti 3 - Manipulations d'autres outils/protocoles côté client
+## Partie 3 - Manipulations d'autres outils/protocoles côté client
 
 ### 1 - DHCP
 
@@ -78,7 +78,7 @@ Apres  avoir modier le Gateway je n'est plus acces a internet car il doit sureme
 
 **le bail expire** : samedi 24 janvier 2026 01:20:58
 
-La commande "*ipconfig /renew*" me permet de demander au DHCP une nouvelle ip :
+La commande "*ipconfig /renew*" me permet de demander au DHCP une nouvelle IP :
 ![alt text](image/image-9.png)
 
 ### 2 - DNS

@@ -1,20 +1,20 @@
 # B1 Linux - TP3
 
-## Parti 1 - Exploration en solo
+## Partie 1 - Exploration en solo
 
 ### 1 - Base64
 
-Apres avoir lancé les commandes suivantes :
+Après avoir lancé les commandes suivantes :
 ```
 dd if=/dev/urandom of=file_bin bs=1k count=50
 openssl base64 -e -in file_bin -out file_bin_b64
 ```
-J'obtien le fichier file_bin_b64 qui contient le contenu du fichier file_bin encodé en base64. ils ont quasiment la même taille.
+J'obtiens le fichier file_bin_b64 qui contient le contenu du fichier file_bin encodé en base64. Ils ont quasiment la même taille.
 
 - -rw-rw-r-- 1 administrateur administrateur **51200** févr. 13 16:24 file_bin
 - -rw-rw-r-- 1 administrateur administrateur **69335** févr. 13 15:52 file_bin_b64
 
-Apres avoir effectuer la commande ```diff -s file_bin file_bin2``` je sais que les fichiers sont bien different
+Après avoir effectué la commande ```diff -s file_bin file_bin2``` je sais que les fichiers sont bien différents
 
 ### 2 - AES (Chiffrement symétrique)
 
@@ -23,7 +23,7 @@ Maintenant avec les commandes :
 cat /usr/share/dict/words | grep ker  | tr "\n" " " >message
 openssl enc -e -salt -in message -out message_c -aes256 -pbkdf2 -md sha256
 ```
-je crée les fichiers "message" qui ma permit d'écrire tous les mots du dictionnaire aligné dans lequel il y a "ker" puis on a chiffré en aes256 dans le fichier "message_c"
+je crée les fichiers "message" qui m'a permis d'écrire tous les mots du dictionnaire alignés dans lequel il y a "ker" puis on a chiffré en aes256 dans le fichier "message_c"
 
 Ensuite je vais décoder ce fichier "message_c" :
 ![image](part1/image/image.png)
@@ -32,38 +32,38 @@ Avec la commande :
 ```
 openssl enc -e -a -salt -in message -out message_c2 -aes256 -pbkdf2 -md sha256
 ```
-J'obtient un fichier "message_c2" le meme chiffrement que "message_c" mais chiffrer en base64 
+J'obtiens un fichier "message_c2" le même chiffrement que "message_c" mais chiffré en base64 
 
 ### 3 - RSA (Chiffrement asymétrique)
 
-J'ai d'abord effectuer la commande :
+J'ai d'abord effectué la commande :
 ```
 openssl genrsa -out cle_ynov.pem 2048
 openssl rsa -in cle_ynov.pem -text -noout
 ```
-Ce qui ma permis de génère une paire de clés RSA que j'ai pus ensuite chiffrer:
+Ce qui m'a permis de générer une paire de clés RSA que j'ai pu ensuite chiffrer :
 ![image](part1/image/image2.png)
 
-Ensuite je fait la commande : 
+Ensuite je fais la commande : 
 ```openssl rsa -in cle_ynov.pem -out cle_ynov2.pem -aes256 ```
-pour sécuriser mes clefs rsa
+pour sécuriser mes clefs RSA
 
 Je crée ensuite une clef publique avec la commande 
 ```openssl rsa -in cle_ynov.pem -pubout -out clepublique_ynov.pem```
 
-J'ai crée un fichier "pass_ynov" dans lequelle j'y es mis "Password" que j'ai ensuite chiffrer avec la clef publique qu'on a crée juste avant avec la commande 
+J'ai créé un fichier "pass_ynov" dans lequel j'y ai mis "Password" que j'ai ensuite chiffré avec la clef publique qu'on a créée juste avant avec la commande 
 ```openssl pkeyutl -encrypt -in pass_ynov -inkey clepublique_ynov.pem -pubin -out pass_ynov_c```
-puis je les dechiffrer avec la clef privé en utilisant la commande 
+puis je l'ai déchiffré avec la clef privée en utilisant la commande 
 ```openssl pkeyutl -decrypt -in pass_ynov_c -inkey cle_ynov.pem```
-Pour obtenir a nouveau "Password"
+Pour obtenir à nouveau "Password"
 
-## Parti 2 - Explotation des connaissances
+## Partie 2 - Exploitation des connaissances
 
 ### A - Base64
 
-### 1. Génération d’un fichier binaire
+### 1. Génération d'un fichier binaire
 
-Pour crée contenant 100 Ko de données binaires aléatoires. je fait cette commande :
+Pour créer contenant 100 Ko de données binaires aléatoires. je fais cette commande :
 ```dd if=/dev/urandom of=data.bin bs=1k count=100```
 et pour vérifier sa taille :
 ```ls -lh data.bin```
@@ -72,27 +72,27 @@ et on peut voir qu'il fait bien 100ko :
 
 ### 2. Encodage
 
-Tout d'abord je fait mon chiffrement en base64 :
+Tout d'abord je fais mon chiffrement en base64 :
 
 ```openssl base64 -e -in data.bin -out data.b64```
 
-Ensuit j'afficher le contenue avec la commande :
+Ensuite j'affiche le contenu avec la commande :
 
 ```cat data.b64```
 
 ![image](part2/image/image.png)
 
-Puis je comparer les tailles :
+Puis je compare les tailles :
 
 ```ls -lh data.bin data.b64```
 
 ![image](part2/image/image2.png)
 
-On peux remarquer quelle fait bien 30% de plus en taille chiffrer
+On peut remarquer qu'elle fait bien 30% de plus en taille chiffrée
 
 ### 3. Décodage
 
-Pour finir on vas décoder le fichier Base64 :
+Pour finir on va décoder le fichier Base64 :
 
 ```openssl base64 -d -in data.b64 -out data_restored.bin```
 
@@ -106,17 +106,17 @@ Puis vérifier que les fichiers sont identiques :
 
 **1.** Non c'est juste un encodage, n'importe qui peut décoder sans clé donc il n'y a aucune sécurité
 
-***2.** la Base64 utilise 4 caractères pour représenter 3 octets binaires donc plus lourd
+**2.** La Base64 utilise 4 caractères pour représenter 3 octets binaires donc plus lourd
 
-**3.** *Comme on pus voir précédement elle est a peux pres 30% plus grande
+**3.** Comme on a pu voir précédemment elle est à peu près 30% plus grande
 
 **4.** La commande diff ou cmp, ou comparer leurs hash (sha256sum, md5sum).
 
 ### B - Chiffrement symétrique – AES
 
-### 1. Création d’un message
+### 1. Création d'un message
 
-Je fait la commande ```nano confidentiel.txt``` puis j'y ajoutes mon nom ect...
+Je fais la commande ```nano confidentiel.txt``` puis j'y ajoute mon nom etc...
 
 ```
 Vincent
@@ -127,17 +127,17 @@ Ce fichier sera chiffré avec AES-256.
 La sécurité des données est primordiale.
 OpenSSL est un outil puissant pour la cryptographie
 ```
-### 2. Création d’un message
+### 2. Création d'un message
 
 Puis je chiffre le fichier avec la commande : ```openssl enc -e -salt -in confidentiel.txt -out confidentiel.enc -aes256 -pbkdf2 -md sha256```
 
-Je vérifie qu'il est bien en binéaire : ```cat confidentiel.enc```
+Je vérifie qu'il est bien en binaire : ```cat confidentiel.enc```
 
 ![image](part2/image/image4.png)
 
 ### 3. Déchiffrement
 
-Je le d"échiffre ensuite avec la commande : ```openssl enc -d -in confidentiel.enc -out confidentiel_dechiffre.txt -aes256 -pbkdf2 -md sha256```
+Je le déchiffre ensuite avec la commande : ```openssl enc -d -in confidentiel.enc -out confidentiel_dechiffre.txt -aes256 -pbkdf2 -md sha256```
 
 et je vérifie qu'il est identique : ```diff -s confidentiel.txt confidentiel_dechiffre.txt```
 
@@ -145,26 +145,26 @@ et je vérifie qu'il est identique : ```diff -s confidentiel.txt confidentiel_de
 
 ### 4. Analyse
 
-Je rechiffre le meme TXT pour voir s il ya une diiference entre les deux :
+Je rechiffre le même TXT pour voir s'il y a une différence entre les deux :
 ```openssl enc -e -salt -in confidentiel.txt -out confidentiel2.enc -aes256 -pbkdf2 -md sha256```
 
 Puis je les compare : ```diff confidentiel.enc confidentiel2.enc```
 
 ![image](part2/image/image6.png)
 
-On peux voir qu'il on une différence et c'est normal car ils ont pas le meme sel.
+On peut voir qu'ils ont une différence et c'est normal car ils n'ont pas le même sel.
 
 ### 5. Questions
 
-**1.** Le sel est différent à chaque chiffrement, donc le résultat change même avec le même mot de passe comme dit précédement
+**1.** Le sel est différent à chaque chiffrement, donc le résultat change même avec le même mot de passe comme dit précédemment
 
-**2.** Pour que le chiffrement soit bien aléatoir a chaque fois ce qui protege mieux
+**2.** Pour que le chiffrement soit bien aléatoire à chaque fois ce qui protège mieux
 
 **3.** Le déchiffrement échoue ou produit des données corrompues. Les options doivent être identiques.
 
 **4.** Pour dériver une clé robuste à partir du mot de passe en appliquant de nombreuses itérations, ralentissant les attaques par force brute.
 
-**5.** la différence :
+**5.** La différence :
 - Encodage (Base64) : transformation réversible sans clé, aucune sécurité
 - Chiffrement (AES) : nécessite une clé secrète, assure la confidentialité
 
@@ -172,32 +172,32 @@ On peux voir qu'il on une différence et c'est normal car ils ont pas le meme se
 
 ### 1. Génération de clés
 
-Tout d'abord on générer la paire de clés RSA protégée :
+Tout d'abord on génère la paire de clés RSA protégée :
 ```openssl genrsa -aes256 -out rsa_private.pem 2048```
 
-Puis on exporter la clé publique :
+Puis on exporte la clé publique :
 ```openssl rsa -in rsa_private.pem -pubout -out rsa_public.pem```
 
-On afficher les paramètres de la clé privée :
+On affiche les paramètres de la clé privée :
 ```openssl rsa -in rsa_private.pem -text -noout```
 
 ![image](part2/image/image7.png)
 
-Et on afficher les paramètres de la clé publique :
+Et on affiche les paramètres de la clé publique :
 ```openssl rsa -in rsa_public.pem -pubin -text -noout```
 
 ![image](part2/image/image8.png)
 
 La comparaison entre les deux est la suivante :
-- Clé privée : contient le modulo, exposant public (65537), exposant privé, prime1, prime2, exposants 1 et 2, coefficient donc enormement plus long
+- Clé privée : contient le modulo, exposant public (65537), exposant privé, prime1, prime2, exposants 1 et 2, coefficient donc énormément plus long
 - Clé publique : contient uniquement le modulo et l'exposant public (65537)
 
 ### 2. Chiffrement asymétrique
 
-Ensuite je créer le fichier :
+Ensuite je crée le fichier :
 ```nano secret.txt```
 
-ou dans lequelle jy écrit :
+ou dans lequel j'y écris :
 ```
 MESSAGE TRES TRES SECRET DE LA MORT QUI TUE
 ```
@@ -210,19 +210,19 @@ et le déchiffrer avec la clé privée :
 
 ![image](part2/image/image9.png)
 
-Puis on fini par sauvgarder la clé prive dans un fichier :
+Puis on finit par sauvegarder la clé privée dans un fichier :
 ```openssl pkeyutl -decrypt -in secret.enc -inkey rsa_private.pem -out secret_dechiffre.txt```
 
 ### 3. Questions
 
 **1.** Parce qu'elle permet de déchiffrer tous les messages destinés au propriétaire. Si elle est compromise, la sécurité est totalement perdue.
 
-**2.**  RSA est très lent et ne peut chiffrer que des données de taille limitée (inférieure à la taille de la clé).
+**2.** RSA est très lent et ne peut chiffrer que des données de taille limitée (inférieure à la taille de la clé).
  
 **3.** La différence :
 - Clé publique : modulo + exposant public uniquement
 - Clé privée : modulo + exposant public + exposant privé + prime1 + prime2 + autres paramètres secrets
-- 
+
 **4.** C'est le produit de deux nombres premiers (p×q). Il définit l'espace mathématique des opérations de chiffrement/déchiffrement.
 
 **5.** Chiffrement hybride : RSA (lent) pour échanger la clé, AES (rapide) pour chiffrer les données volumineuses. Meilleur compromis vitesse/sécurité.
@@ -236,10 +236,10 @@ Tout d'abord nous allons créer le fichier :
 
 On y ajoute :
 ```
-Ceci est un contrat tres confidentiel
+Ceci est un contrat très confidentiel
 ```
 
-Puis on vas générer l'empreinte (hash) :
+Puis on va générer l'empreinte (hash) :
 ```sha256sum contrat.txt```
 
 ![image](part2/image/image10.png)
@@ -258,10 +258,10 @@ Puis on va modifier légèrement le fichier :
 ```nano contrat.txt```
 
 ```
-Ceci est un contrat tres   ss confidentiel
+Ceci est un contrat très   ss confidentiel
 ```
 
-Et pour finir refaire la vérification pour tester si il est toujours correcte :
+Et pour finir refaire la vérification pour tester s'il est toujours correct :
 ```openssl dgst -sha256 -verify rsa_public.pem -signature contrat.sig contrat.txt```
 
 ![image](part2/image/image12.png)
