@@ -193,7 +193,7 @@ Maintenant on va activer la journalisation sur certaines règles
 
 ### 15. Filtrage MAC
 
-Il est impossible de faire un filtrage par adresse MAC 
+Maintenant je modifie les accees par adresses MAC
 ![image](image/image23.png)
 
 1. NON, c'est une sécurité très faible car il est facilement contournable
