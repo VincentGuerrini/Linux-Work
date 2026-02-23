@@ -159,3 +159,56 @@ Je finis par observer les logs :
 1. Elle ne s'affecte pas 
 
 ### 11. Blocage par catégorie
+
+Tout d'abord on va crée un horaire :
+
+![image](image/image20.png)
+
+Puis regler un regle existante sur cette horaire :
+
+![image](image/image21.png)
+
+1. Pour : Productivité - Gestion de la bande passante - Conformité et politique d'entreprise - Sécurité - Flexibilité - Équilibre vie pro/perso
+
+### 12. Serveur web local
+
+Tout d'abord j'install un serveur Web sur ma VM Ubuntu (nginx) : 
+![image](image/image22.png)
+
+Puis j'autorise l'acces que au specifique et la bloque au autre :
+![image](image/image23.png)
+
+1. Oui, c'est ce qu'on vient de faire
+2. Oui, on a filtré sur le port 80 (HTTP)
+3. Car les menace peuvent venir au en interne : Machines compromises - Employés malveillants - Erreurs humaines - Segmentation de sécurité - Conformité
+
+### 13. Logs et analyse
+
+Maintenant on va active la journalisation sur cetaine raigle 
+![image](image/image24.png)
+
+1. Un packet bloqué ne va pas passé par le firewall comme une ip alors qu'une autorisé oui
+2. Dans les logs (Status puis System Logs puis Firewall)
+3. Format des logs : Source IP:Port vers Destination IP:Port
+
+### 15. Filtrage MAC
+
+Il est impossible de faire un filtrage par adresse MAC 
+
+1. NON, c'est une sécurité très faible car il est facilement contournable
+2. L'adresse MAC peut être changée en quelques secondes (ex: Max Spoofing)
+
+### 16. Portail captif 
+
+On va donc crée le portail captif:
+![image](image/image25.png)
+
+1. Wi-Fi public - Réseaux invités - Contrôle d’accès / authentification
+2. Les avantages : Authentification des utilisateurs - Acceptation de conditions d’usage - Suivi / journalisation des connexions - Contrôle fin sans gérer les IP manuellement
+
+### 17. Sauvegarde / restauration
+
+Maintenant je vais enregistrer toute la config:
+![image](image/image26.png)
+
+1. Pour : Prévenir pertes après panne / erreur - Récupération rapide (continuité de service) - Protection contre mauvaise manipulation / mise à jour - Indispensable pour reprise après incident
