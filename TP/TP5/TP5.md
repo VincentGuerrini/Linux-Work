@@ -4,7 +4,7 @@
 
 ### 1. Accès à l'interface
 
-Après avoir tout configuré sur ma VM Ubuntu et pfSense j'essaye de me connecter à ma VM pfSense par Ubuntu via Firefox :
+Après avoir tout configuré sur ma VM Ubuntu et pfSense, j'essaie de me connecter à ma VM pfSense par Ubuntu via Firefox :
 ```https://192.168.56.104```
 
 ![image](image/image.png)
@@ -44,7 +44,7 @@ Tout d'abord je configure le serveur DHCP pour le réseau LAN :
 
 ![image](image/image4.png)
 
-(je fais bien attention de mettre la range entre 100 & 199 comme indiqué sur VirtualBox)
+(je fais bien attention de mettre la plage entre 100 & 199 comme indiqué sur VirtualBox)
 
 1. Les raisons pour lesquelles on utilise un serveur DHCP : Simplicité - Évite les conflits d'IP - Flexibilité - Gestion centralisée - Gain de temps
 2. Celles qui sont disponibles soit 192.168.56.100 à 192.168.56.200 (dans notre cas)
@@ -126,7 +126,7 @@ Tout d'abord je bloque l'accès à un site web en passant par le DNS (facebook.c
 Puis je teste si ça fonctionne bien (sur terminal) : 
 ![image](image/image14.png)
 
-(sur firefox) :
+(sur Firefox) :
 ![image](image/image15.png)
 
 1. Par nom de domaine car les gros sites changent régulièrement d'IP
@@ -135,7 +135,7 @@ Puis je teste si ça fonctionne bien (sur terminal) :
 
 ### 9. Blocage d'une catégorie de sites (jeux d'argent)
 
-Maintenant on va enlever tout accès aux sites de Jeux d'argent à toute personne passant par le firewall :
+Maintenant on va enlever tout accès aux sites de jeux d'argent à toute personne passant par le firewall :
 
 ![image](image/image16.png)
 
@@ -147,8 +147,8 @@ Maintenant on va enlever tout accès aux sites de Jeux d'argent à toute personn
 
 ### 10. Blocage par catégorie
 
-Comme avant on ban tout accès aux réseaux sociaux donc je commence par créer mon alias :
-![image](image17.png)
+Comme avant on bloque tout accès aux réseaux sociaux donc je commence par créer mon alias :
+![image](image/image17.png)
 
 Ensuite je crée ma règle de blocage :
 ![image](image/image18.png)
@@ -156,15 +156,15 @@ Ensuite je crée ma règle de blocage :
 Je finis par observer les logs :
 ![image](image/image19.png)
 
-1. Elle ne s'affecte pas 
+1. Elle ne s'applique pas 
 
 ### 11. Blocage par catégorie
 
-Tout d'abord on va crée un horaire :
+Tout d'abord on va créer un horaire :
 
 ![image](image/image20.png)
 
-Puis regler un regle existante sur cette horaire :
+Puis régler une règle existante sur cet horaire :
 
 ![image](image/image21.png)
 
@@ -172,22 +172,22 @@ Puis regler un regle existante sur cette horaire :
 
 ### 12. Serveur web local
 
-Tout d'abord j'install un serveur Web sur ma VM Ubuntu (nginx) : 
+Tout d'abord j'installe un serveur Web sur ma VM Ubuntu (nginx) : 
 ![image](image/image22.png)
 
-Puis j'autorise l'acces que au specifique et la bloque au autre :
+Puis j'autorise l'accès qu'aux spécifiques et le bloque aux autres :
 ![image](image/image23.png)
 
 1. Oui, c'est ce qu'on vient de faire
 2. Oui, on a filtré sur le port 80 (HTTP)
-3. Car les menace peuvent venir au en interne : Machines compromises - Employés malveillants - Erreurs humaines - Segmentation de sécurité - Conformité
+3. Car les menaces peuvent venir aussi en interne : Machines compromises - Employés malveillants - Erreurs humaines - Segmentation de sécurité - Conformité
 
 ### 13. Logs et analyse
 
-Maintenant on va active la journalisation sur cetaine raigle 
+Maintenant on va activer la journalisation sur certaines règles 
 ![image](image/image24.png)
 
-1. Un packet bloqué ne va pas passé par le firewall comme une ip alors qu'une autorisé oui
+1. Un paquet bloqué ne va pas passer par le firewall comme une IP alors qu'un autorisé oui
 2. Dans les logs (Status puis System Logs puis Firewall)
 3. Format des logs : Source IP:Port vers Destination IP:Port
 
@@ -196,19 +196,19 @@ Maintenant on va active la journalisation sur cetaine raigle
 Il est impossible de faire un filtrage par adresse MAC 
 
 1. NON, c'est une sécurité très faible car il est facilement contournable
-2. L'adresse MAC peut être changée en quelques secondes (ex: Max Spoofing)
+2. L'adresse MAC peut être changée en quelques secondes (ex : MAC Spoofing)
 
 ### 16. Portail captif 
 
-On va donc crée le portail captif:
+On va donc créer le portail captif :
 ![image](image/image25.png)
 
-1. Wi-Fi public - Réseaux invités - Contrôle d’accès / authentification
-2. Les avantages : Authentification des utilisateurs - Acceptation de conditions d’usage - Suivi / journalisation des connexions - Contrôle fin sans gérer les IP manuellement
+1. Wi-Fi public - Réseaux invités - Contrôle d'accès / authentification
+2. Les avantages : Authentification des utilisateurs - Acceptation de conditions d'usage - Suivi / journalisation des connexions - Contrôle fin sans gérer les IP manuellement
 
 ### 17. Sauvegarde / restauration
 
-Maintenant je vais enregistrer toute la config:
+Maintenant je vais enregistrer toute la configuration :
 ![image](image/image26.png)
 
 1. Pour : Prévenir pertes après panne / erreur - Récupération rapide (continuité de service) - Protection contre mauvaise manipulation / mise à jour - Indispensable pour reprise après incident
