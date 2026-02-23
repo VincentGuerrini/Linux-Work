@@ -176,7 +176,7 @@ Tout d'abord j'installe un serveur Web sur ma VM Ubuntu (nginx) :
 ![image](image/image22.png)
 
 Puis j'autorise l'accès qu'aux spécifiques et le bloque aux autres :
-![image](image/image23.png)
+
 
 1. Oui, c'est ce qu'on vient de faire
 2. Oui, on a filtré sur le port 80 (HTTP)
@@ -194,6 +194,7 @@ Maintenant on va activer la journalisation sur certaines règles
 ### 15. Filtrage MAC
 
 Il est impossible de faire un filtrage par adresse MAC 
+![image](image/image23.png)
 
 1. NON, c'est une sécurité très faible car il est facilement contournable
 2. L'adresse MAC peut être changée en quelques secondes (ex : MAC Spoofing)
