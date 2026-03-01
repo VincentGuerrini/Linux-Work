@@ -133,7 +133,7 @@ Internet ── WiFi(wlp3s0) ── PC Portable(enp108s0) ──Ethernet── P
 
 **Chat bidirectionnel fonctionnel** :
 
-Portable → "Hello from laptop!"" → Fixe reçoit instantanément
+Portable → "Hello from laptop!" → Fixe reçoit instantanément
 
 ![image](image/image20.png)
 
@@ -197,9 +197,9 @@ sudo iptables -A INPUT -p icmp --icmp-type echo-reply -j ACCEPT
 ### 1 - DHCP
 
 ![alt text](image/image-8.png)
-**Adresse du DHCP** : 10.33.79.254
+**Adresse du serveur DHCP** : 10.33.79.254
 
-**le bail expire** : samedi 24 janvier 2026 01:20:58
+**Le bail expire** : samedi 24 janvier 2026 01:20:58
 
 La commande "*ipconfig /renew*" me permet de demander au DHCP une nouvelle IP :
 ![alt text](image/image-9.png)
@@ -207,9 +207,9 @@ La commande "*ipconfig /renew*" me permet de demander au DHCP une nouvelle IP :
 ### 2 - DNS
 
 ![alt text](image/image-8.png)
-**Adresse DNS** : 8.8.8.8
+**Adresse du serveur DNS** : 8.8.8.8
 
-la commande "*nslookup*" me donne :
+La commande "*nslookup*" me donne :
 ![alt text](image/image-10.png)
 
 ***nslookup google.com***

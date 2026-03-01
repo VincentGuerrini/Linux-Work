@@ -6,7 +6,7 @@
 
 ## Goal :
 
-**For now just some exercices :p**
+**For now just some exercises :p**
 
 ---
 
